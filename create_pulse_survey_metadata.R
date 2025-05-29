@@ -75,9 +75,27 @@ create_pulse_survey_metadata <- function(fp) {
       )
     )
   
+  # DEMOGRAPHIC metadata
+  # (note: not all years and cycles have the same set of demographic groups)
+  demo_metadata <- read_excel(fp, sheet = "US", range = "A9:B200", col_names = FALSE) %>%
+    clean_names() %>%
+    rename(demo_option = x1,
+           demo_category = x2) %>%
+    filter(!is.na(demo_option) &
+             !str_detect(demo_option, "^\\*")) %>%
+    mutate(demo_category = as.character(demo_category)) %>%
+    mutate(demo_category = case_when(
+      is.na(demo_category) ~ demo_option,
+      str_detect(demo_category, "^[0-9]+$") ~ NA,
+      TRUE ~ "error"
+    )) %>%
+    fill(demo_category, .direction = "down") %>%
+    filter(demo_option != demo_category)
+  
   return(list(
     geographic_areas = geographic_areas,
-    question_metadata = question_metadata,
-    response_metadata = response_metadata
+    questions = question_metadata,
+    responses = response_metadata,
+    demo_groups = demo_metadata
   ))
 }
