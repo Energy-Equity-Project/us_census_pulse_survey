@@ -39,12 +39,11 @@ write.csv(
 
 write.csv(
   metadata$demo_groups,
-  file.path(outdir, "demo_groups"),
+  file.path(outdir, "demo_groups.csv"),
   row.names = FALSE
 )
 
-totals <- data.frame()
-disagregated_data <- data.frame()
+pulse_survey_db <- data.frame()
 
 pulse_survey_files <- pulse_survey_files[1:8]
 
@@ -58,24 +57,14 @@ for (curr_file in pulse_survey_files) {
   # Iterate and read all relevant sheets and clean
   for (curr_sheet in relevant_sheets) {
     print(paste0("Processing sheet...", curr_sheet))
-    curr_dfs <- extract_data(curr_file, curr_sheet, metadata)
-    totals <- totals %>%
-      bind_rows(curr_dfs$totals)
-    
-    disagregated_data <- disagregated_data %>%
-      bind_rows(curr_dfs$disagregated_data)
+    curr_df <- extract_data(curr_file, curr_sheet, metadata)
+    pulse_survey_db <- pulse_survey_db %>%
+      bind_rows(curr_df)
   }
 }
 
 write.csv(
-  totals,
-  file.path(outdir, "totals_2021.csv"),
+  pulse_survey_db,
+  file.path(outdir, "pulse_survey_db_2021.csv"),
   row.names = FALSE
 )
-
-write.csv(
-  disagregated_data,
-  file.path(outdir, "disagregated_data_2021.csv"),
-  row.names = FALSE
-)
-

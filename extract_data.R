@@ -56,7 +56,7 @@ extract_data <- function(fp, sheet_name, metadata) {
     # Add table cycle type (week/cycle) and number
     mutate(
       cycle_type = cycle_type,
-      cyle_number = cycle_number
+      cycle_number_number = cycle_number
     )
   
   # Extract disagregated data
@@ -91,14 +91,18 @@ extract_data <- function(fp, sheet_name, metadata) {
     ) %>%
     # Separate between question and response id
     separate(question_response_id, into = c("question_id", "response_id"), sep = "_") %>%
+    mutate(question_id = as.numeric(question_id),
+           response_id = as.numeric(response_id)) %>%
     # Add table cycle type (week/cycle) and number
     mutate(
       cycle_type = cycle_type,
-      cyle_number = cycle_number
+      cycle_number_number = cycle_number
     )
   
-  return(list(
-    totals = totals,
-    disagregated_data = disagregated_data
-  ))
+  df <- totals %>%
+    bind_rows(disagregated_data) %>%
+    # reorganize column order
+    select(cycle_type, cycle_number, geo_id, demo_id, question_id, response_id, value)
+  
+  return(df)
 }
