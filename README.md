@@ -8,14 +8,13 @@
 # Housing Table 4 – Household Energy Use and Spending in the Last 12 Months, by Select Characteristics
 
 ## What Table 4 is and where it sits in every release
-“**Housing Table 4 – Household Energy Use and Spending in the Last 12 Months, by Select Characteristics**” is one of the *Housing Tables* issued with every detailed-table release of the Household Pulse Survey (HPS). It reports the **percent of adults** (plus margins of error) who, at least once in the previous year:
+“**Housing Table 4 – Household Energy Use and Spending in the Last 12 Months, by Select Characteristics**” is one of the *Housing Tables* issued with every detailed-table release of the Household Pulse Survey (HPS). It reports the **total population (18 years older)** (plus margins of error) who, at least once in the last 12 months:
 
 | Indicator (question ID) | What it captures | Response categories shown in the table |
 | --- | --- | --- |
-| `HSE11` | Kept the home at a temperature they felt was unsafe or unhealthy to save energy | *Almost every month / Some months / 1–2 months / Never* |
-| `HSE12` | Could not pay the energy bill in full | Same four-point scale |
-| `HSE13` | Received a shut-off notice for electricity, gas, oil, or other home-heating fuel | Same four-point scale |
-| `HSE14` | Actually had service disconnected | Same four-point scale |
+| `HSE10` | Forewent expenses for basic household necessities (food, medicine) to pay energy bill | *Almost every month / Some months / 1–2 months / Never / Did not report* |
+| `HSE11` | Kept the home at a temperature they felt was unsafe or unhealthy to pay energy bill | *Almost every month / Some months / 1–2 months / Never / Did not report* |
+| `HSE12` | Unable to pay partial or full energy bill | *Almost every month / Some months / 1–2 months / Never / Did not report* |
 
 Each cycle’s Table 4 breaks those four indicators out **across ~35 “select characteristics”**—income brackets, tenure (owner / renter), race-ethnicity, disability status, presence of children, SNAP receipt, state, and the 15 largest MSAs—using HPS person-level replicate weights so that all percentages represent the U.S. civilian, non-institutional adult population. A companion *Standard Error Table 4* is released side-by-side.
 
@@ -26,8 +25,10 @@ Each cycle’s Table 4 breaks those four indicators out **across ~35 “select c
 | Phase / Cycle (collection window) | Release date | Status of Table 4 |
 | --- | --- | --- |
 | **Phase 3.2, Week 34** (Jul 21 – Aug 2 2021) | 11 Aug 2021 | **First appearance** after HPS added the “Household Energy Insecurity” module |
-| Weeks 35–48 (Phase 3.2) and three additional phases (2021–23) | Aug 2021 – Jun 2023 | Table 4 retained; wording unchanged |
-| **Phase 4.x (monthly cycles) 01 – 09** | Jan 9 – Sep 16 2024 | Table 4 continued; layout unchanged except minor label updates |
+| Weeks 34-41 | Aug 2021 – Dec 2021 | Table 4 retained; wording unchanged |
+| Weeks 42 - 51 | Dec 2021 - Nov 2022 | additional demographic groups: "Difficulty with self care" and "Difficulty understanding or being understood"|
+| Weeks 52 - 63 | Nov 2022 - Oct 2023 | additional demographic groups: "Difficulty with self care" and "Difficulty understanding or being understood"|
+| **Phase 4.x (monthly cycles) 01 – 09** | Jan 9 – Sep 16 2024 | additional demographic groups: "Access to home-based internet", "Access to mobile-based internet", "Recieved free or reduced-price internet" |
 | **Phase 4.2, Cycle 09** (Aug 20 – Sep 16 2024) | 3 Oct 2024 | **Final cross-sectional release**; Census Bureau ended detailed tables when HPS shifted to the longitudinal HTOPS design |
 | **2025 – present (HTOPS)** | – | No detailed tables produced, so Table 4 no longer published |
 
@@ -55,10 +56,10 @@ Each cycle’s Table 4 breaks those four indicators out **across ~35 “select c
 
 *It is the only federal time-series that tracks **energy insecurity** at state and metro scales in near-real time.* Researchers and advocates use it to:
 
-* quantify the share of households foregoing other necessities to keep the lights on;
-* monitor the impact of fuel-price spikes, extreme-weather shocks, and LIHEAP disbursements;
-* identify disproportionate burdens on renters, low-income households, and communities of color; and
-* evaluate policy proposals such as shut-off moratoria or bill-payment relief programs.
+* quantify the share of population/households foregoing other necessities to keep the lights on
+* quantify the share of the population/households keeping homes at unsafe temperatures to keep the lights on
+* quantify the share of population/households unable to pay full or partial bill
+
 
 ---
 
