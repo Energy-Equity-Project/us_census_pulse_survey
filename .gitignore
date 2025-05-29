@@ -1,6 +1,11 @@
 
+# R setup files
+*.Rproj
+
+
 # MacOS directory file
 .DS_Store
 
 # Outputs
 */outputs/
+.Rproj.user
