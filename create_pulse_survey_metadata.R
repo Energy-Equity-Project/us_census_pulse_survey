@@ -54,7 +54,8 @@ create_pulse_survey_metadata <- function(fp) {
         str_detect(question, "unable to pay an energy bill") ~ "unable_pay_energy",
         TRUE ~ paste0("category_", row_number())
       )
-    )
+    ) %>%
+    mutate(question_id = row_number())
   
   # RESPONSES metadata table
   # Read row to get responses
@@ -72,7 +73,8 @@ create_pulse_survey_metadata <- function(fp) {
         response == "Never" ~ "never",
         response == "Did not report" ~ "no_report",
         TRUE ~ "other"
-      )
+      ),
+      response_id = row_number()
     )
   
   # DEMOGRAPHIC metadata
@@ -90,7 +92,8 @@ create_pulse_survey_metadata <- function(fp) {
       TRUE ~ "error"
     )) %>%
     fill(demo_category, .direction = "down") %>%
-    filter(demo_option != demo_category)
+    filter(demo_option != demo_category) %>%
+    mutate(demo_id = row_number())
   
   return(list(
     geographic_areas = geographic_areas,
