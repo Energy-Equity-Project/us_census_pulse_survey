@@ -27,8 +27,7 @@ create_pulse_survey_metadata <- function(fp) {
       nchar(sheet_names) == 2 | sheet_names == "DC" ~ "state",
       str_detect(sheet_names, "Metro_Area") ~ "metro_area",
       TRUE ~ "other"
-    ),
-    created_at = Sys.time()
+    )
   ) %>%
     # Adding FIPS codes for each state
     left_join(
@@ -36,7 +35,12 @@ create_pulse_survey_metadata <- function(fp) {
         select(state, fips_code = state_code) %>%
         distinct(),
       by = c("geo_code"="state")
-    )
+    ) %>%
+    mutate(fips_code = as.character(fips_code)) %>%
+    mutate(fips_code = case_when(
+      is.na(fips_code) ~ "NA",
+      TRUE ~ fips_code
+    ))
   
   # QUESTIONS metadata table
   # Read row to get list of questions
@@ -55,7 +59,9 @@ create_pulse_survey_metadata <- function(fp) {
         TRUE ~ paste0("category_", row_number())
       )
     ) %>%
-    mutate(question_id = row_number())
+    mutate(question_id = row_number()) %>%
+    # reorganize column order
+    select(question_id, question, question_short_name)
   
   # RESPONSES metadata table
   # Read row to get responses
@@ -75,7 +81,9 @@ create_pulse_survey_metadata <- function(fp) {
         TRUE ~ "other"
       ),
       response_id = row_number()
-    )
+    ) %>%
+    # reorganize column order
+    select(response_id, response, response_short_name)
   
   # DEMOGRAPHIC metadata
   # (note: not all years and cycles have the same set of demographic groups)
@@ -93,7 +101,16 @@ create_pulse_survey_metadata <- function(fp) {
     )) %>%
     fill(demo_category, .direction = "down") %>%
     filter(demo_option != demo_category) %>%
-    mutate(demo_id = row_number())
+    mutate(demo_id = row_number()) %>%
+    bind_rows(
+      data.frame(
+        demo_option = c("total"),
+        demo_category = c("total"),
+        demo_id = 0
+      )
+    ) %>%
+    # reorganizing column order
+    select(demo_id, demo_option, demo_category)
   
   return(list(
     geographic_areas = geographic_areas,

@@ -19,28 +19,34 @@ pulse_survey_files <- list.files(pulse_survey_dir, pattern = "^pulse_survey", fu
 # Create metadata tables from first pulse survey file
 metadata <- create_pulse_survey_metadata(pulse_survey_files[1])
 
-write.csv(
+write.table(
   metadata$geographic_areas,
-  file.path(outdir, "geographic_areas.csv"),
-  row.names = FALSE
+  file = file.path(outdir, "geographic_areas.csv"),
+  sep = ",",
+  row.names = FALSE,
+  col.names = FALSE
 )
 
-write.csv(
+write.table(
   metadata$questions,
-  file.path(outdir, "questions.csv"),
+  file = file.path(outdir, "questions.csv"),
+  sep = ",",
   row.names = FALSE
 )
 
-write.csv(
+write.table(
   metadata$responses,
-  file.path(outdir, "responses.csv"),
+  file = file.path(outdir, "responses.csv"),
+  sep = ",",
   row.names = FALSE
 )
 
-write.csv(
+write.table(
   metadata$demo_groups,
-  file.path(outdir, "demo_groups.csv"),
-  row.names = FALSE
+  file = file.path(outdir, "demo_groups.csv"),
+  sep = ",",
+  row.names = FALSE,
+  col.names = FALSE
 )
 
 pulse_survey_db <- data.frame()
